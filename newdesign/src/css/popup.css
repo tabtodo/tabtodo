@@ -1,0 +1,236 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	font: 14px/24px;
+	width: 500px;
+	position: relative;
+	float: left;
+}
+
+input ,button, .check, {
+	-webkit-transition: all 0.1s;
+}
+
+.tab_favicon, .tab_link, 
+.check_uncheck, .check, .uncheck {
+	-webkit-transition: -webkit-transform 0.2s;
+}	
+
+.check_uncheck, 
+.tab_favicon, .tab_link	{
+	cursor: pointer;
+}
+	
+input, button,
+.logo,
+.tab_favicon, .tab_link {
+	display: inline-block;
+	float: left;
+}
+
+.logo {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+header {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+	-webkit-box-flex: 1;
+	-webkit-flex-grow: 1;
+	-ms-flex-positive: 1;
+	flex-grow: 1;
+	width: 100%;
+	height: 64px;
+	border-bottom: 1px solid #efefef;
+	padding: 14px 8px;
+}
+
+section {
+	width: 100%;
+	min-height: 96px;
+}
+
+button {
+	font-size: 24px;
+	line-height: 24px;
+	text-align: center;
+	color: rgba(0,0,0,0.15);
+}
+
+header button {
+	padding: 6px;
+}
+
+button:hover {
+	color: #111;
+}
+
+button:active {
+	color: #ccc;
+}
+
+.actions {
+	width: auto;
+	float: right;
+}
+
+/**** HEADER ****/
+.logo {
+	margin: 6px;
+	margin-right: 0;
+	width: 128px;
+	height: 24px;
+	background-image: url(../img/icon+logo_@2x.png);
+}
+
+input[type=search] { 
+	-webkit-box-flex: 1;
+	-webkit-flex-grow: 1;
+	-ms-flex-positive: 1;
+	padding: 6px 12px;
+	margin: 0 21px;
+	height: 36px;
+	width: 200px;
+	background: #efefef;
+	box-sizing: border-box;
+}
+
+
+/**** TABS SECTION ****/
+.tab {
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+	padding: 12px;
+	padding-right: 8px;
+	height: 48px;
+	width: 100%;
+}
+
+.tab:hover {
+	background: #efefef;
+}
+
+.tab:hover .tab_link {
+	width: 322px;
+	color: #111;
+}
+
+.tab:hover .tab_actions {
+	display: inline-block;
+}
+
+.tab_favicon {
+	margin: 0 4px;
+	width: 24px;
+	height: 24px;
+	border-radius: 2px;
+	background: #ddd;
+}
+
+.tab_link {
+	-webkit-box-flex: 1;
+	-webkit-flex-grow: 1;
+	-ms-flex-positive: 1;
+	line-height: 24px;
+	font-size: 13px;
+	margin-left: 8px;
+	padding-right: 8px;
+	height: 24px;
+	width: 430px;
+	color: #555;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tab_actions {
+	position: relative;
+	display: none;
+	float: right;
+	width: 108px;
+	height: 24px;
+	margin-left: 10px;
+}
+
+.tab_actions button {
+	padding: 0 6px;
+}
+
+.check_uncheck {
+	padding: 12px;
+	margin-top: -12px;
+	margin-left: -66px;
+	margin-right: 12px;
+	width: 54px;
+	height: 48px;
+	background-color: #ddd;
+	-webkit-transition: all 0.2s;
+}
+
+.check_uncheck:hover {
+	background-color: #ccc;
+}
+
+.check_uncheck button {
+	width: 100%;
+	color: rgb(255,255,255);
+}
+
+.uncheck {
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transform: scale(0);
+	-webkit-transform-origin: 50% 100%;
+}
+
+.check {
+	position: absolute;
+	margin: 2px 4px;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+	-webkit-transform: scale(1);
+}
+
+.check_background {
+	background-color: #00d45a;	
+}
+
+.check_background:hover {
+	background-color: #00c754;	
+}
+
+
+/**** transforms: make sure not to override by accident ****/
+
+.Xplus48px {
+	-webkit-transform: translate(+48px, 0);
+}
+
+.Xplus6px {
+	margin-left: -60px;
+	margin-right: 6px;
+}
+
+.width-minus-54px {
+	padding-right: 54px;
+}
+
+
+.visible {
+	opacity: 1;
+	visibility: visible;
+	-webkit-transform: scale(1);
+}
+
+.hidden {
+	border: 0px solid #bbb;
+	background-color: rgba(255,255,255,0.3);	
+}

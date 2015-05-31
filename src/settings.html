@@ -1,0 +1,52 @@
+      <header>
+        <div class="logo">{{ test }}</div>
+
+        <div style="position: absolute;right: 50px;">
+            <button class="tutButton done" ng-click="ChangeToTutorial()" title="Ok let me start" >Open tutorial</button>
+         </div>
+      </header>
+ 
+
+ <ul >
+ 	<li>
+ 		<label style="display: inline-block" title ="Will automaticly close the tab once you complete the task">
+            <input type="checkbox" class="settings-input" ng-model="settingsObject.autoCloseCompletedTask" ng-change='Save()'/>
+            <span class="settings-tab">Auto Close completed tasks</span>
+            
+         </label>
+
+    </li>
+     <!--<li>
+     	<label style="display: inline-block" title = "This will auto sort your tabs, putting tasks on top">
+                <input type="checkbox" class="settings-input" ng-model="settingsObject.autoSortTabs" ng-change='Save()'/>
+                <span class="settings-tab">Auto sort tabs - Tasks are First</span>
+             </label>
+     </li>-->
+
+     <li>
+     	<label style="display: inline-block" title = "This will auto sort your tabs, putting tasks on top">
+                <input type="checkbox" class="settings-input" ng-model="settingsObject.showCloseCompletedTask" ng-change='Save()'/>
+                <span class="settings-tab">Show Closed Completed Tasks</span>
+             </label>
+     </li>
+
+     <li>
+        <label style="display: inline-block" title = "This will auto sort your tabs, putting tasks on top">
+                <input type="checkbox" class="settings-input" ng-model="settingsObject.showCloseUnCompletedTask" ng-change='Save()'/>
+                <span class="settings-tab">Show Closed UnCompleted Tasks</span>
+             </label>
+     </li>
+
+     <li>
+        <label style="display: inline-block" title = "This will auto sort your tabs, putting tasks on top">
+        <span class="settings-tab">Show Closed Tasks for :</span>
+                <select class='settings-input' ng-model='settingsObject.showClosedTaskFor' ng-change='Save()'>
+                    <option value="3600000">1 hour</option>
+                    <option value="86400000">1 Day</option>
+                    <option value="604800000">1 Week</option>
+                </select>
+                
+             </label>
+     </li>
+ </ul>
+

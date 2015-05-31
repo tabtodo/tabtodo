@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html ng-app="tabtodo" ng-csp>
+    <head>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/ngDialog.min.css">
+        <link rel="stylesheet" href="css/popup.css">
+        <link rel="stylesheet" href="css/style.css">
+        
+        <script src="js/lib/jqueryandangular.min.js"></script>
+        <script src="js/lib/ngDialog.min.js"></script>
+        <script src="js/lib/angular-strap.min.js"></script>
+        <script src="js/lib/angular-strap.tpl.min.js"></script>
+        
+        
+        
+        <script src="js/app/app.js"></script>
+        <script src="js/app/popup.js"></script>
+
+
+    </head>
+    <body id="container" >
+        <header>
+        <div class="logo"></div>
+        <input ng-model="searchText" type="search" placeholder="search">
+            <div class="actions clearfix" ng-controller="MgmController">
+                <button class="icon-feedback" ng-click="feedback()"></button>
+                <button class="icon-settings" ng-click="openSettings()"></button>
+                <button class="icon-close" ng-click="closeMe()"></button>
+            </div>
+        </header>
+        <section  ng-controller="PageController">
+            <ul ui-sortable="sortableOptions" ng-model='content'>
+                    <content-item class="tab" ng-repeat="item in content | filter:searchText" content="item"
+                    close-tab="closeTabPage(tabToChange, $index)" 
+                    untask-tab="untaskTabPage(tabToChange, $index)"
+                    change-tab="changeTabPage(tabToChange)" 
+                    make-task="makeTaskPage(tabToChange, $index)" 
+                    complete-task="completeTaskPage(tabToChange, $index)"
+                    change-due="changeDueTaskPage(tabToChange)"
+                    rename-tab="renameTabPage(tabToChange, $index)" 
+                    ></content-item>
+            </ul>
+
+            <span ng-if='hasClosedCompletedTabs  && IsCompletedInSettings()' class="closed-tasks-title" 
+            title="You may select how long to see this tasks in settings section">Completed TabToDos</span>
+            <ul class="closedTabs" ng-if='hasClosedCompletedTabs  && IsCompletedInSettings()'>
+                <li ng-repeat="completedTask in closedTabArray"  class="tab">
+                    <span><img ng-src="{{completedTask.favIconUrl}}" class="tab_favicon no-cursor" alt=""></span>
+                    <span><p class="tab_link line-through no-cursor">{{completedTask.title}}</p></span>
+                    <span class="tab_actions">
+                        <button ng-click="clearCompletedTask($index)" class="close icon-close" title="Clear From List" ></button>
+                        <button ng-click="reopenClosedTab($index, completedTask)" class="add icon-return" title="ReOpen Tab" ></button>
+                    </span>
+                </li>
+            </ul>
+
+            <span ng-if='hasClosedUnCompletedTabs  && IsUnCompletedInSettings()' class="closed-tasks-title" 
+            title="You may select how long to see this tasks in settings section">UnCompleted TabToDos</span>
+            <ul class="closedTabs" ng-if='hasClosedUnCompletedTabs  && IsUnCompletedInSettings()'>
+                <li ng-repeat="completedTask in closedUnCompletedTabArray"  class="tab">
+                    <span><img ng-src="{{completedTask.favIconUrl}}" class="tab_favicon no-cursor" alt=""></span>
+                    <span><p class="tab_link no-cursor">{{completedTask.title}}</p></span>
+                    <span class="tab_actions">
+                        <button ng-click="clearUnCompletedTask($index)" class="close icon-close" title="Clear From List" ></button>
+                        <button ng-click="reopenClosedUnCopletedTab($index, completedTask)" class="add icon-return" title="ReOpen Tab" ></button>
+                    </span>
+                </li>
+            </ul>
+           
+
+        </section>
+
+    </body>
+</html>

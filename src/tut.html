@@ -1,0 +1,52 @@
+      <header>
+        <button ng-disabled='currentTutIndex==1' class="tutButton" ng-click="GetPrev()" title="Prev slide" >Back</button>
+        <button ng-disabled='currentTutIndex==7' class="tutButton" ng-click="GetNext()" title="Next slide" >Next</button>
+
+          
+
+        <div style="position: absolute;right: 50px;">
+            <button class="tutButton done" ng-click="closeThisDialog(true)" title="Ok let me start" >Finish Tutorial</button>
+            Slide {{currentTutIndex}}/7
+         </div>
+
+        
+        
+            
+      </header>
+ 
+
+ <ul >
+    <li ng-if='currentTutIndex==1'>
+       <span class="settings-tab">Open TabToDo extension to see all open tabs</span> 
+        
+       <div class="tutImage tutorialFirst"></div>
+    </li>
+     
+     <li ng-if='currentTutIndex==2'>
+       <span class="settings-tab">Turn an open tab into a Task by clicking the + button</span> 
+       <div class="tutImage tutorialSecond"></div>
+    </li>
+
+    <li ng-if='currentTutIndex==3'>
+       <span class="settings-tab">Rename the task you just created. Turn it into an action item</span> 
+       <div class="tutImage tutorialThird"></div>
+    </li>
+    <li ng-if='currentTutIndex==4'>
+       <span class="settings-tab">Once completed- mark the task as done by hovering over it and ticking the checkbox</span> 
+       <div class="tutImage tutorialFourth"></div>
+    </li>
+    <li ng-if='currentTutIndex==5'>
+       <span class="settings-tab">Use the visual indicator to get an immediate tab/task status</span> 
+       <div class="tutImage tutorialFifth"></div>
+    </li>
+    <li ng-if='currentTutIndex==6'>
+       <span class="settings-tab">Click the X button to close a tab/task</span> 
+       <div class="tutImage tutorialSixth"></div>
+    </li>
+    <li ng-if='currentTutIndex==7'>
+       <span class="settings-tab">Have control over closed tasks, as well as tasks that were not completed. You can always reopen any closed tab</span> 
+       <div class="tutImage tutorialLast"></div>
+    </li>
+
+ </ul>
+   
