@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html ng-app="tabtodo" ng-csp>
+
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/popup.css">
+	<link rel="stylesheet" href="css/style.css">
+
+
+	<script src="js/lib/jquery-1.8.2.min.js"></script>
+	<script src="js/lib/jquery-ui.min.js"></script>
+	<script src="js/lib/angular.min.js"></script>
+	<script src="js/lib/angular.ui.min.js"></script>
+
+
+
+	<!--
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+        <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+        -->
+
+
+
+	<script src="js/app/app.js"></script>
+	<script src="js/app/popup.js"></script>
+</head>
+
+<body id="container">
+
+	<header>
+		<div class="logo"></div>
+		<input type="search" placeholder="search">
+		<div class="actions clearfix">
+			<button class="icon-feedback"></button>
+			<button class="icon-settings"></button>
+			<button class="icon-close"></button>
+		</div>
+	</header>
+
+	<section>
+		<ul class="tab">
+			<li class="check_uncheck">
+				<button class="uncheck icon-tick"></button>
+				<div class="check"></div>
+			</li>
+			<li><img src="https://a-v2.sndcdn.com/assets/images/sc-icons/ios-a62dfc8f.png" class="tab_favicon" alt=""></li>
+			<li><p class="tab_link">Explore the largest community of artists, bands, podcasters and creators of music and audio</p></li>
+			<li class="tab_actions">
+				<button class="add icon-add"></button>
+				<button class="edit icon-edit"></button>
+				<button class="close icon-close"></button>
+			</li>
+		</ul>
+		
+		<ul class="tab">
+			<li class="check_uncheck">
+				<button class="uncheck icon-tick"></button>
+				<div class="check"></div>
+			</li>
+			<li><img src="https://f.vimeocdn.com/images_v6/apple-touch-icon-57.png" class="tab_favicon" alt=""></li>
+			<li><p class="tab_link">Vimeo, Your Videos Belong Here</p></li>
+			<li class="tab_actions">
+				<button class="add icon-add"></button>
+				<button class="edit icon-edit"></button>
+				<button class="close icon-close"></button>
+			</li>
+		</ul>
+		
+		<ul class="tab">
+			<li class="check_uncheck">
+				<button class="uncheck icon-tick"></button>
+				<div class="check"></div>
+			</li>
+			<li><img src="http://d2evssqqc3vy5p.cloudfront.net/home/static/images/apple-touch-icon.png" class="tab_favicon" alt=""></li>
+			<li><p class="tab_link">Rdio | Notifications (2)</p></li>
+			<li class="tab_actions">
+				<button class="add icon-add"></button>
+				<button class="edit icon-edit"></button>
+				<button class="close icon-close"></button>
+			</li>
+		</ul>
+
+		<div class="tab">
+			<div class="check_uncheck">
+				<button class="uncheck icon-tick"></button>
+				<div class="check"></div>
+			</div>
+			<img src=" " class="tab_favicon" alt="">
+			<p class="tab_link">New Tab</p>
+			<div class="tab_actions">
+				<button class="add icon-add"></button>
+				<button class="edit icon-edit"></button>
+				<button class="close icon-close"></button>
+			</div>
+		</div>
+	</section>
+
+	<script src="js/interactions.js"></script>
+</body>
+
+</html>

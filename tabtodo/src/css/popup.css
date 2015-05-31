@@ -1,0 +1,398 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	font: 14px/24px;
+	width: 500px;
+	min-height: 550px;
+	position: relative;
+	float: left;
+}
+
+input ,button, .check, {
+	-webkit-transition: all 0.1s;
+}
+
+.tab_favicon, .tab_link, 
+.check_uncheck, .check, .uncheck {
+	-webkit-transition: -webkit-transform 0.2s;
+}	
+
+.line-through {
+	text-decoration: line-through;
+}
+.check_uncheck, 
+.tab_favicon, .tab_link	{
+	cursor: pointer;
+}
+	
+input, button,
+.logo,
+.tab_favicon, .tab_link {
+	display: inline-block;
+	float: left;
+}
+
+.logo {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+header {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+	-webkit-box-flex: 1;
+	-webkit-flex-grow: 1;
+	-ms-flex-positive: 1;
+	flex-grow: 1;
+	width: 100%;
+	height: 64px;
+	border-bottom: 1px solid #efefef;
+	padding: 14px 8px;
+}
+
+section {
+	width: 100%;
+	min-height: 96px;
+}
+
+button {
+	font-size: 24px;
+	line-height: 24px;
+	text-align: center;
+	color: rgba(0,0,0,0.15);
+}
+
+header button {
+	padding: 6px;
+}
+
+button:hover {
+	color: #111;
+}
+
+button:active {
+	color: #ccc;
+}
+
+.actions {
+	width: auto;
+	float: right;
+}
+
+/**** HEADER ****/
+.logo {
+	margin: 6px;
+	margin-right: 0;
+	width: 128px;
+	height: 24px;
+	background-image: url(../img/icon+logo_@2x.png);
+}
+
+
+input[type=search] { 
+	-webkit-box-flex: 1;
+	-webkit-flex-grow: 1;
+	-ms-flex-positive: 1;
+	padding: 6px 12px;
+	margin: 0 21px;
+	height: 36px;
+	width: 200px;
+	background: #efefef;
+	box-sizing: border-box;
+}
+
+
+/**** TABS SECTION ****/
+.tab {
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+	padding: 12px;
+	padding-right: 8px;
+	height: 48px;
+	width: 100%;
+}
+
+.tab:hover {
+	background: #efefef;
+}
+
+.tab:hover .tab_link {
+	width: 322px;
+	color: #111;
+}
+
+.tab:hover .tab_link_rename {	
+	width: 358px;
+	color: #111;
+}
+
+.tab:hover .tab_actions {
+	display: inline-block;
+}
+
+.tab_actions::-webkit-input-placeholder {
+   width: 100%;
+}
+
+.tab_favicon {
+	margin: 0 4px;
+	width: 24px;
+	height: 24px;
+	border-radius: 2px;
+	/*background: #ddd;*/
+}
+
+.tab_link {
+/*	display: none;*/
+	-webkit-box-flex: 1;
+	-webkit-flex-grow: 1;
+	-ms-flex-positive: 1;
+	line-height: 24px;
+	font-size: 13px;
+	margin-left: 8px;
+	padding-right: 8px;
+	height: 24px;
+	width: 430px;
+	color: #555;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tab_link_rename {
+	display: none;
+	-webkit-box-flex: 1;
+	-webkit-flex-grow: 1;
+	-ms-flex-positive: 1;
+	line-height: 24px;
+	font-size: 13px;
+	margin-left: 8px;
+	padding-right: 8px;
+	height: 24px;
+	width: 430px;
+	color: #555;
+	background: none;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tab_actions {
+	position: relative;
+	display: none;
+	float: right;
+	width: 108px;
+	height: 24px;
+	margin-left: 10px;
+}
+
+.tab_actions button {
+	float: right;
+	padding: 0 6px;
+}
+
+.check_uncheck {
+	padding: 12px;
+	margin-top: -12px;
+	margin-left: -66px;
+	margin-right: 12px;
+	width: 54px;
+	height: 48px;
+	background-color: #ddd;
+	-webkit-transition: all 0.2s;
+}
+
+.check_uncheck:hover {
+	background-color: #ccc;
+}
+
+.check_uncheck button {
+	width: 100%;
+	color: rgb(255,255,255);
+}
+
+.uncheck {
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transform: scale(0);
+	-webkit-transform-origin: 50% 100%;
+}
+
+.check {
+	position: absolute;
+	margin: 2px 4px;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+	-webkit-transform: scale(1);
+}
+
+.check_background {
+	background-color: #00d45a;	
+}
+
+.check_background:hover {
+	background-color: #00c754;	
+}
+
+
+/**** transforms: make sure not to override by accident ****/
+
+.Xplus48px {
+	-webkit-transform: translate(+48px, 0);
+}
+
+.Xplus6px {
+	margin-left: -60px;
+	margin-right: 6px;
+}
+
+.width-minus-54px {
+	padding-right: 54px;
+}
+
+.block {
+	display: inline-block;
+}
+
+.none {
+	display: none;
+}
+
+.visible {
+	opacity: 1;
+	visibility: visible;
+	-webkit-transform: scale(1);
+}
+
+.hidden {
+	border: 0px solid #bbb;
+	background-color: rgba(255,255,255,0.3);	
+}
+
+.width72px {
+	width: 72px;
+}
+
+.width358px {
+	width: 358px;
+}
+
+.closedTabs {
+	  border-top: 1px solid #efefef;
+}
+
+.no-cursor {
+  cursor: default !important;
+}
+.closed-tasks-title {
+
+  float: right;
+  width: auto;
+  height: auto;
+  background: none;
+  color: #a3a3a3;
+  font-size: 11px;
+  margin-right: 20px;
+}
+
+.settings-tab {
+	  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  line-height: 24px;
+  font-size: 14px;
+  margin-left: 8px;
+  padding-right: 8px;
+  height: 24px;
+  width: 430px;
+  color: #555;
+  /*white-space: nowrap;*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+.settings-tab-info {
+  font-size: 13px;
+}
+
+.settings-input {
+	vertical-align: middle;	
+	float: none;
+}
+
+select {
+     -webkit-appearance: menulist;
+  box-sizing: border-box;
+  align-items: center;
+  /*border: 1px solid;*/
+   font-size: 13px;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  white-space: pre;
+  -webkit-rtl-ordering: logical;
+  /*color: black;*/
+  background-color: white;
+  cursor: default;
+}
+
+
+.tutButton {
+	color: inherit;
+	border: 2px outset buttonface;
+  	border-image-source: initial;
+  	border-image-slice: initial;
+  	border-image-width: initial;
+  	border-image-outset: initial;
+  	border-image-repeat: initial;
+  	font-size: 16px;
+  	line-height: 16px;
+  	text-align: center;
+  	margin-right: 4px;
+}
+
+.done {
+	color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+
+.tutImage {
+	margin: 6px;
+	margin-right: 0;
+	width: 400px;
+	height: 400px;
+	background-size: cover;
+}
+
+.tutorialFirst {
+	background-image: url(../img/TTD-1.png);	
+}
+.tutorialSecond {
+	background-image: url(../img/TTD-2.png);	
+}
+.tutorialThird {
+	background-image: url(../img/TTD-3.png);	
+}
+.tutorialFourth {
+	background-image: url(../img/TTD-4.png);	
+}
+.tutorialFifth {
+	background-image: url(../img/TTD-5.png);	
+}
+.tutorialSixth {
+	background-image: url(../img/TTD-6.png);	
+}
+.tutorialLast {
+	background-image: url(../img/TTD-7.png);	
+}
