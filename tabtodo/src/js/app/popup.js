@@ -71,8 +71,8 @@ myApp.service('tabsStorageService', function () {
 
     this.getUnCompletedClosedTasks = function (callback){
         chrome.storage.sync.get('unCompletedclosedTabsList2', function (value) {
-            if (value && value.closedTabsList2)
-                callback(value.closedTabsList2);
+            if (value && value.unCompletedclosedTabsList2)
+                callback(value.unCompletedclosedTabsList2);
             else
                 callback(null);
         })
@@ -277,7 +277,19 @@ myApp.controller("PageController", function ($scope, $timeout, ngDialog, pageInf
         return settingsFactory.getSettings().showCloseUnCompletedTask;
    };
 
+   function printArrays(message) {
+    console.log(message);
 
+    console.log("$scope.tasksArray: lenget" + $scope.tasksArray.length);
+    console.log($scope.tasksArray);
+
+    console.log("$scope.closedUnCompletedTabArray: lenget" + $scope.closedUnCompletedTabArray.length);
+    console.log($scope.closedUnCompletedTabArray);
+
+    console.log("$scope.closedTabArray: lenget" + $scope.closedTabArray.length);
+    console.log($scope.closedTabArray);
+
+   }
    
     $scope.changeTabPage = function (tabId){
         tabsInfoService.changeTab(tabId);
@@ -293,19 +305,22 @@ myApp.controller("PageController", function ($scope, $timeout, ngDialog, pageInf
             var task = $scope.content[index];
             task.closedDate = Date.now();
 
-            $scope.closedTabArray.push(task);    
-            saveClosedTasks();
+            $scope.closedTabArray.push(copyTask(task));
+            printArrays("closed completed tasks : "+task.tabId);    
+            
             $scope.hasClosedCompletedTabs = true;
         }
 
         if ($scope.content[index].type == 'openTask') {
             var task = $scope.content[index];
             
-            $scope.closedUnCompletedTabArray.push(task);    
-            saveClosedTasks();
+            $scope.closedUnCompletedTabArray.push(copyTask(task));
+            printArrays("closeduncompleted tasks : "+task.tabId);    
+            
             $scope.hasClosedUnCompletedTabs = true;
         }
 
+        saveClosedTasks();
         // remove from list
         $scope.content.splice(index,1);
         // close teh tab
@@ -393,6 +408,19 @@ myApp.controller("PageController", function ($scope, $timeout, ngDialog, pageInf
             return model;
     };
 
+    function copyTask(tabItemModel){
+            var model = {};
+                model.type = tabItemModel.type;
+                model.title = tabItemModel.title;
+                model.url = tabItemModel.url;
+                model.favIconUrl = tabItemModel.favIconUrl;
+                model.tabId = tabItemModel.tabId;
+                model.originalIndex = tabItemModel.index;
+                if (typeof tabItemModel.closedDate !== 'undefined')
+                    model.closedDate = tabItemModel.closedDate;
+            return model;
+    };
+
 
 
     pageInfoService.getInfo(function (info) {
@@ -427,6 +455,7 @@ myApp.controller("PageController", function ($scope, $timeout, ngDialog, pageInf
         
         tabsStorageService.saveTabs($scope.tasksArray);
         $scope.closedTabArray.splice(index, 1);
+        printArrays("clearing task" + tabTask.tabId);
         saveClosedTasks();
 
         if ($scope.closedTabArray.length == 0)
@@ -441,11 +470,13 @@ myApp.controller("PageController", function ($scope, $timeout, ngDialog, pageInf
         if ($scope.tasksArray[tabTask.tabId]) {
             console.log("removing from task array");
             $scope.tasksArray.splice(tabTask.tabId, 1);
+            printArrays("removing from task array" + tabTask.tabId);
         }
         tabsStorageService.saveTabs($scope.tasksArray);
         
         $scope.closedUnCompletedTabArray.splice(index, 1);
-        
+        printArrays("removing from closedUnCompletedTabArray" + tabTask.tabId);
+
         saveClosedTasks();
         if ($scope.closedUnCompletedTabArray.length == 0)
         {
@@ -478,6 +509,7 @@ myApp.controller("PageController", function ($scope, $timeout, ngDialog, pageInf
             tabsInfoService.getTabsInfo(function (tabsInfos) {
                 if (tasksArray)
                 {
+                     console.log("tasksArray true");
                     var newTaskArray = [];
                     var found=false;
                     for (var i=0;i<tabsInfos.length;i++) {
@@ -486,7 +518,7 @@ myApp.controller("PageController", function ($scope, $timeout, ngDialog, pageInf
                          if (tasksArray[tabId]){
                              console.log("found tab in stroage array");
                              console.log(tasksArray[tabId]);
-                             tabsInfos[i] = tasksArray[tabId];
+                             tabsInfos[i] = copyTask(tasksArray[tabId]);
                              // we regenrate the task array inorder to remove old closed tabs
                              newTaskArray[tabId] = tasksArray[tabId];
                              found = true;
@@ -498,20 +530,22 @@ myApp.controller("PageController", function ($scope, $timeout, ngDialog, pageInf
                             
                        
                             if (!IsExistsInListTab($scope.closedTabArray, task.tabId) && task.closedDate && dayBeforeTime< task.closedDate) {
-                                console.log("found completed task to show");
+                                
                                 console.log(task);
-                                $scope.closedTabArray.push(task);
+                                $scope.closedTabArray.push(copyTask(task));
+                                printArrays("found completed task to show" + task.tabId);
                                 $scope.hasClosedCompletedTabs = true;
-                                saveClosedTasks();
+                                //saveClosedTasks();
                             }
                             // This means that the uncompleted task was closed 
                             // We just check if it wasn't because already in the lists
                             else if (!IsExistsInListTab($scope.closedTabArray, task.tabId) && !IsExistsInListTab($scope.closedUnCompletedTabArray, task.tabId)) {
                                 console.log("found uncompleted task to show");
                                 console.log(task);
-                                $scope.closedUnCompletedTabArray.push(task);
+                                $scope.closedUnCompletedTabArray.push(copyTask(task));
+                                  printArrays("found uncompleted task to show" + task.tabId);
                                 $scope.hasClosedUnCompletedTabs = true;
-                                saveClosedTasks();
+                                //saveClosedTasks();
                             }
 
 
@@ -523,6 +557,13 @@ myApp.controller("PageController", function ($scope, $timeout, ngDialog, pageInf
                     else
                        $scope.tasksArray = [];
 
+                   /*
+                   if(!$scope.hasClosedCompletedTabs)
+                        $scope.closedTabArray = [];
+
+                    if (!$scope.hasClosedUnCompletedTabs)
+                        $scope.closedUnCompletedTabArray = [];
+                    */
 
                 }
 
@@ -534,9 +575,17 @@ myApp.controller("PageController", function ($scope, $timeout, ngDialog, pageInf
         });
         
            // get Closed tabs
-        tabsStorageService.getClosedTabs(function (closedTabsInfos) {
+       
+
+    };
+
+    $scope.getTabsInfo = (function () {
+        // We get tasks info from storage.
+
+         tabsStorageService.getClosedTabs(function (closedTabsInfos) {
             var tasksArray;
-            debugger;
+            console.log("got closed tabs info:");
+            console.log(closedTabsInfos);
              if (closedTabsInfos){
                  tasksArray = closedTabsInfos;
                  //3600000 - `1 hour
@@ -546,23 +595,58 @@ myApp.controller("PageController", function ($scope, $timeout, ngDialog, pageInf
 
                 for (var i=0;i<tasksArray.length;i++) {
                     var tabId = tasksArray[i].tabId;
-                    if (tasksArray[i].closedDate > dayBeforeTime) {
-                        $scope.closedTabArray.push(tasksArray[i]);
+
+                    if (tasksArray[i].closedDate > dayBeforeTime) {// && !IsExistsInListTab($scope.closedTabArray, tasksArray[i].tabId)) {
+                        
+                        console.log(tasksArray[i]);
+                        $scope.closedTabArray.push(copyTask(tasksArray[i]));
+                        printArrays("found completed task to show 2" + tasksArray[i].tabId);
                         //$scope.closedTabArray[''+tasksArray[i].tabId]= tasksArray[i];
                         $scope.hasClosedCompletedTabs = true;
                     }        
+                    else { 
+                        console.log("closed tab will not be shown: ");
+                        console.log(tasksArray[i]);
+                        console.log("dayBeforeTime: " +dayBeforeTime);
+                    }
                 }
 
             }
+
+            // closed tabs done
+               // get Closed tabs
+            tabsStorageService.getUnCompletedClosedTasks(function (unClosedTabsInfos) {
+                var tasksArray;
+                debugger;
+                console.log("got unClosedTabsInfos tabs info:");
+                console.log(unClosedTabsInfos);
+                 if (unClosedTabsInfos){
+                     tasksArray = unClosedTabsInfos;
+                     //3600000 - `1 hour
+                     //86400000 - 24 hours
+                     // 604800000 - one week
+
+                    for (var i=0;i<tasksArray.length;i++) {
+                        var tabId = tasksArray[i].tabId;
+                        console.log(tasksArray[i]);
+                        $scope.closedUnCompletedTabArray.push(copyTask(tasksArray[i]));
+                        printArrays("found uncompleted task to show 2" + tasksArray[i].tabId);
+                        //$scope.closedTabArray[''+tasksArray[i].tabId]= tasksArray[i];
+                        $scope.hasClosedUnCompletedTabs = true;
+
+                    }
+
+                }
+                // unclosed tabs done
+                $scope.reload();
+
+            });
+
         });
        
-
-    };
-
-    $scope.getTabsInfo = (function () {
-        // We get tasks info from storage.
         
-        $scope.reload();
+        
+        
         
 
 
